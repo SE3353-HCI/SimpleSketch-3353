@@ -14,7 +14,7 @@ namespace SimpleSketch_3353
     public partial class Form1 : Form
     {
         public Graphics g;
-        public int xCoord=0, yCoord = 0;
+        public int xCoord=0, yCoord=0;
         public List<List<Point>> ListOfStrokes = new List<List<Point>>();
         List<Rectangle> RectangleList = new List<Rectangle>();
         List<Point> startEllPoints = new List<Point>();
@@ -26,8 +26,8 @@ namespace SimpleSketch_3353
 
         Rectangle r, EllipseCoords2;
         public Pen p = new Pen(Color.Black, 1);
-        bool isDrawing;
-
+        bool isDrawing, lineDrawn = false;
+        public int polyEndX, polyEndY;
         public Point start, end;
         public Shape currentShape;
         public String selectedShape="freeHand";
@@ -58,7 +58,12 @@ namespace SimpleSketch_3353
                 currentShape.Draw(start, e.Location);
                 repaint(); 
             }
-            
+
+            if(lineDrawn)
+            {
+                Point Start = new Point(polyEndX, polyEndY);
+                currentShape.Draw(Start, e.Location);
+            }
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -115,11 +120,29 @@ namespace SimpleSketch_3353
                 xCoord = e.X;
                 yCoord = e.Y;
             }
+
+            if (selectedShape.Equals("Polygon") && lineDrawn==false)
+            {
+                start = new Point(e.X, e.Y);
+                currentShape = new Polygon(start, e.Location);
+                currentShape.penColor = p.Color;
+                lineDrawn = true;
+            }
         }
 
         private void panel2_MouseUp(object sender, MouseEventArgs e)
         {
             isDrawing = false;
+
+            if(lineDrawn)
+            {
+                Polygon p = (Polygon)currentShape;
+                p.addFinishedLine(start, e.Location);
+                polyEndX = e.Location.X;
+                polyEndY = e.Location.Y;
+                currentShape = p;
+            }
+            
             /*RectangleList.Add(r);
 
             if(selectedShape.Equals("Ellipse"))
@@ -133,6 +156,7 @@ namespace SimpleSketch_3353
                 startLinePoints.Add(start);
                 endLinePoints.Add(end);
             }*/
+
             shapeList.Add(currentShape);
             repaint();
         }
@@ -171,6 +195,12 @@ namespace SimpleSketch_3353
         {
             selectedShape = "Circle";
         }
+
+        private void polygon_Click(object sender, EventArgs e)
+        {
+            selectedShape = "Polygon";
+        }
+
         private void RedColor_Click(object sender, EventArgs e)
         {
             p.Color = Color.Red;
@@ -240,6 +270,23 @@ namespace SimpleSketch_3353
         }
         public Panel getPanel2() {
             return panel2;
+        }
+
+        private void panel2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lineDrawn && e.Button==MouseButtons.Left)
+            {
+                Polygon p = (Polygon)currentShape;
+                p.addFinishedLine(start, e.Location);
+                currentShape = p;
+            }
+            if (lineDrawn && e.Button == MouseButtons.Right)
+            {
+                Polygon p = (Polygon)currentShape;
+                p.addFinishedLine(start, e.Location);
+                currentShape = p;
+                lineDrawn = false;
+            }
         }
     }
 }

@@ -45,6 +45,7 @@
             this.freeHand = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.polygon = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,6 +72,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.polygon);
             this.panel1.Controls.Add(this.circle);
             this.panel1.Controls.Add(this.square);
             this.panel1.Controls.Add(this.CursorButton);
@@ -170,6 +172,7 @@
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.panel2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseClick);
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseUp);
@@ -179,6 +182,13 @@
             resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Name = "listView1";
             this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // polygon
+            // 
+            resources.ApplyResources(this.polygon, "polygon");
+            this.polygon.Name = "polygon";
+            this.polygon.UseVisualStyleBackColor = true;
+            this.polygon.Click += new System.EventHandler(this.polygon_Click);
             // 
             // Form1
             // 
@@ -211,6 +221,7 @@
         private System.Windows.Forms.Button CursorButton;
         private System.Windows.Forms.Button circle;
         private System.Windows.Forms.Button square;
+        private System.Windows.Forms.Button polygon;
     }
 }
 

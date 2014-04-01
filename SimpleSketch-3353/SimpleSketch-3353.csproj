@@ -55,6 +55,7 @@
     <Compile Include="Freehand.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="MyRectangle.cs" />
+    <Compile Include="Polygon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shape.cs" />
