@@ -48,38 +48,28 @@
             // 
             // line
             // 
-            this.line.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.line.Location = new System.Drawing.Point(12, 111);
+            resources.ApplyResources(this.line, "line");
             this.line.Name = "line";
-            this.line.Size = new System.Drawing.Size(50, 45);
-            this.line.TabIndex = 0;
-            this.line.Text = "Line";
             this.line.UseVisualStyleBackColor = true;
             this.line.Click += new System.EventHandler(this.line_Click);
             // 
             // rectangle
             // 
-            this.rectangle.Image = ((System.Drawing.Image)(resources.GetObject("rectangle.Image")));
-            this.rectangle.Location = new System.Drawing.Point(12, 213);
+            resources.ApplyResources(this.rectangle, "rectangle");
             this.rectangle.Name = "rectangle";
-            this.rectangle.Size = new System.Drawing.Size(50, 45);
-            this.rectangle.TabIndex = 1;
-            this.rectangle.Text = "Rectangle";
             this.rectangle.UseVisualStyleBackColor = true;
             this.rectangle.Click += new System.EventHandler(this.rectangle_Click);
             // 
             // ellipse
             // 
-            this.ellipse.Location = new System.Drawing.Point(12, 162);
+            resources.ApplyResources(this.ellipse, "ellipse");
             this.ellipse.Name = "ellipse";
-            this.ellipse.Size = new System.Drawing.Size(50, 45);
-            this.ellipse.TabIndex = 2;
-            this.ellipse.Text = "Ellipse";
             this.ellipse.UseVisualStyleBackColor = true;
             this.ellipse.Click += new System.EventHandler(this.ellipse_Click);
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.CursorButton);
             this.panel1.Controls.Add(this.YellowColor);
             this.panel1.Controls.Add(this.BlackColor);
@@ -91,105 +81,75 @@
             this.panel1.Controls.Add(this.ellipse);
             this.panel1.Controls.Add(this.freeHand);
             this.panel1.Controls.Add(this.line);
-            this.panel1.Location = new System.Drawing.Point(4, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(74, 415);
-            this.panel1.TabIndex = 3;
             // 
             // CursorButton
             // 
-            this.CursorButton.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.CursorButton, "CursorButton");
             this.CursorButton.Name = "CursorButton";
-            this.CursorButton.Size = new System.Drawing.Size(50, 45);
-            this.CursorButton.TabIndex = 10;
-            this.CursorButton.Text = "Cursor";
             this.CursorButton.UseVisualStyleBackColor = true;
             this.CursorButton.Click += new System.EventHandler(this.CursorButton_Click);
             // 
             // YellowColor
             // 
+            resources.ApplyResources(this.YellowColor, "YellowColor");
             this.YellowColor.BackColor = System.Drawing.Color.Yellow;
-            this.YellowColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.YellowColor.Location = new System.Drawing.Point(38, 329);
             this.YellowColor.Name = "YellowColor";
-            this.YellowColor.Size = new System.Drawing.Size(25, 25);
-            this.YellowColor.TabIndex = 9;
             this.YellowColor.UseVisualStyleBackColor = false;
             this.YellowColor.Click += new System.EventHandler(this.YellowColor_Click);
             // 
             // BlackColor
             // 
+            resources.ApplyResources(this.BlackColor, "BlackColor");
             this.BlackColor.BackColor = System.Drawing.Color.Black;
-            this.BlackColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BlackColor.Location = new System.Drawing.Point(7, 329);
             this.BlackColor.Name = "BlackColor";
-            this.BlackColor.Size = new System.Drawing.Size(25, 25);
-            this.BlackColor.TabIndex = 8;
             this.BlackColor.UseVisualStyleBackColor = false;
             this.BlackColor.Click += new System.EventHandler(this.BlackColor_Click);
             // 
             // PurpleColor
             // 
+            resources.ApplyResources(this.PurpleColor, "PurpleColor");
             this.PurpleColor.BackColor = System.Drawing.Color.Purple;
-            this.PurpleColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PurpleColor.Location = new System.Drawing.Point(38, 297);
             this.PurpleColor.Name = "PurpleColor";
-            this.PurpleColor.Size = new System.Drawing.Size(25, 25);
-            this.PurpleColor.TabIndex = 7;
             this.PurpleColor.UseVisualStyleBackColor = false;
             this.PurpleColor.Click += new System.EventHandler(this.PurpleColor_Click);
             // 
             // BlueColor
             // 
+            resources.ApplyResources(this.BlueColor, "BlueColor");
             this.BlueColor.BackColor = System.Drawing.Color.Blue;
-            this.BlueColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BlueColor.Location = new System.Drawing.Point(6, 297);
             this.BlueColor.Name = "BlueColor";
-            this.BlueColor.Size = new System.Drawing.Size(25, 25);
-            this.BlueColor.TabIndex = 6;
             this.BlueColor.UseVisualStyleBackColor = false;
             this.BlueColor.Click += new System.EventHandler(this.BlueColor_Click);
             // 
             // GreenColor
             // 
+            resources.ApplyResources(this.GreenColor, "GreenColor");
             this.GreenColor.BackColor = System.Drawing.Color.Green;
-            this.GreenColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.GreenColor.Location = new System.Drawing.Point(38, 265);
             this.GreenColor.Name = "GreenColor";
-            this.GreenColor.Size = new System.Drawing.Size(25, 25);
-            this.GreenColor.TabIndex = 5;
             this.GreenColor.UseVisualStyleBackColor = false;
             this.GreenColor.Click += new System.EventHandler(this.GreenColor_Click);
             // 
             // RedColor
             // 
+            resources.ApplyResources(this.RedColor, "RedColor");
             this.RedColor.BackColor = System.Drawing.Color.Red;
-            this.RedColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.RedColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RedColor.ForeColor = System.Drawing.Color.Red;
-            this.RedColor.Location = new System.Drawing.Point(6, 265);
             this.RedColor.Name = "RedColor";
-            this.RedColor.Size = new System.Drawing.Size(25, 25);
-            this.RedColor.TabIndex = 4;
             this.RedColor.UseVisualStyleBackColor = false;
             this.RedColor.Click += new System.EventHandler(this.RedColor_Click);
             // 
             // freeHand
             // 
-            this.freeHand.Location = new System.Drawing.Point(12, 60);
+            resources.ApplyResources(this.freeHand, "freeHand");
             this.freeHand.Name = "freeHand";
-            this.freeHand.Size = new System.Drawing.Size(50, 45);
-            this.freeHand.TabIndex = 3;
-            this.freeHand.Text = "Free Hand";
             this.freeHand.UseVisualStyleBackColor = true;
             this.freeHand.Click += new System.EventHandler(this.freeHand_Click);
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(84, 12);
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(607, 502);
-            this.panel2.TabIndex = 4;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
@@ -197,22 +157,18 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(701, 16);
+            resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(96, 350);
-            this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(809, 538);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

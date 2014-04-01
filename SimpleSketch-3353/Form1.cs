@@ -13,27 +13,24 @@ namespace SimpleSketch_3353
 {
     public partial class Form1 : Form
     {
-        private Graphics g;
-        int xCoord=0, yCoord = 0;
-        List<List<Point>> ListOfStrokes = new List<List<Point>>();
-        List<Point> currentStroke;
-        
+        public Graphics g;
+        public int xCoord=0, yCoord = 0;
+        public List<List<Point>> ListOfStrokes = new List<List<Point>>();
         List<Rectangle> RectangleList = new List<Rectangle>();
-
         List<Point> startEllPoints = new List<Point>();
         List<Point> endEllPoints = new List<Point>();
-
         List<Point> startLinePoints = new List<Point>();
         List<Point> endLinePoints = new List<Point>();
-
+        List<Shape> shapeList= new List<Shape>();
         List<Color> lineColors = new List<Color>();
 
         Rectangle r, EllipseCoords2;
-        Pen p = new Pen(Color.Black, 1);
+        public Pen p = new Pen(Color.Black, 1);
         bool isDrawing;
 
         public Point start, end;
-        public String Shape="freeHand";
+        public Shape currentShape;
+        public String selectedShape="freeHand";
 
         public Form1()
         {
@@ -43,86 +40,58 @@ namespace SimpleSketch_3353
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            /*e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            if(Shape.Equals("freeHand"))
+            if(selectedShape.Equals("freeHand"))
             {
                 foreach (List<Point> stroke in ListOfStrokes)
                     e.Graphics.DrawLines(p, stroke.ToArray());
-            }
+            }*/
+
+
         }
 
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDrawing && Shape.Equals("freeHand"))
+            if (isDrawing)
             {
-                currentStroke.Add(e.Location);
-                Refresh();
+                currentShape.Draw(start, e.Location);
+                repaint(); 
             }
-
-            if (isDrawing && Shape.Equals("Rectangle"))
-            {
-                panel2.Refresh();
-                int width = e.X - xCoord, height = e.Y - yCoord;
-                r = new Rectangle(Math.Min(e.X, xCoord),Math.Min(e.Y, yCoord),Math.Abs(e.X - xCoord),Math.Abs(e.Y - yCoord));
-                g = panel2.CreateGraphics();
-                g.DrawRectangle(p, r);
-            }
-
-            if (isDrawing && Shape.Equals("Ellipse"))
-            {
-                panel2.Refresh();
-                Rectangle EllipseCoords = new Rectangle(start.X, start.Y, end.X-start.X, end.Y-start.Y);
-                g.DrawEllipse(p, EllipseCoords);
-                end = new Point(e.X, e.Y);
-
-                EllipseCoords2 = new Rectangle(start.X, start.Y, end.X - start.X, end.Y - start.Y);
-                g.DrawEllipse(p, EllipseCoords2);
-            }
-
-            if (isDrawing && Shape.Equals("StraightLine"))
-            {
-                panel2.Refresh();
-                g.DrawLine(p, start,end);
-                end = new Point(e.X, e.Y);
-                lineColors.Add(p.Color);
-                g.DrawLine(p, start, end);
-            }
-
-            if(isDrawing && Shape.Equals("Cursor"))
-            {
-                
-            }
-            repaint();
+            
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
             isDrawing = true;
-            if(Shape.Equals("freeHand"))
+            if(selectedShape.Equals("freeHand"))
             {
-                currentStroke = new List<Point>();
+                /*currentStroke = new List<Point>();
                 currentStroke.Add(e.Location);
-                ListOfStrokes.Add(currentStroke);
+                ListOfStrokes.Add(currentStroke);*/
+                currentShape = new Freehand();
             }
 
-            if(Shape.Equals("Rectangle"))
+            if(selectedShape.Equals("Rectangle"))
             {
                 xCoord = e.X;
                 yCoord = e.Y;
+                currentShape = new MyRectangle(start, e.Location);
             }
 
-            if(Shape.Equals("Ellipse"))
+            if(selectedShape.Equals("Ellipse"))
             {
                 start = new Point(e.X, e.Y);
+                currentShape = new Ellipse(start, e.Location);
             }
 
-            if(Shape.Equals("StraightLine"))
+            if(selectedShape.Equals("StraightLine"))
             {
                 start = new Point(e.X, e.Y);
+                currentShape = new Line(start, e.Location);
             }
 
-            if(Shape.Equals("Cursor"))
+            if(selectedShape.Equals("Cursor"))
             {
                 xCoord = e.X;
                 yCoord = e.Y;
@@ -132,44 +101,46 @@ namespace SimpleSketch_3353
         private void panel2_MouseUp(object sender, MouseEventArgs e)
         {
             isDrawing = false;
-            RectangleList.Add(r);
+            /*RectangleList.Add(r);
 
-            if(Shape.Equals("Ellipse"))
+            if(selectedShape.Equals("Ellipse"))
             {
                 startEllPoints.Add(start);
                 endEllPoints.Add(end);
             }
 
-            if (Shape.Equals("StraightLine"))
+            if (selectedShape.Equals("StraightLine"))
             {
                 startLinePoints.Add(start);
                 endLinePoints.Add(end);
-            }
+            }*/
+            shapeList.Add(currentShape);
+            repaint();
         }
 
         private void freeHand_Click(object sender, EventArgs e)
         {
-            Shape = "freeHand";
+            selectedShape = "freeHand";
         }
 
         private void rectangle_Click(object sender, EventArgs e)
         {
-            Shape = "Rectangle";
+            selectedShape = "Rectangle";
         }
 
         private void ellipse_Click(object sender, EventArgs e)
         {
-            Shape = "Ellipse";
+            selectedShape = "Ellipse";
         }
 
         private void line_Click(object sender, EventArgs e)
         {
-            Shape = "StraightLine";
+            selectedShape = "StraightLine";
         }
 
         private void CursorButton_Click(object sender, EventArgs e)
         {
-            Shape = "Cursor";
+            selectedShape = "Cursor";
         }
 
         private void RedColor_Click(object sender, EventArgs e)
@@ -204,14 +175,21 @@ namespace SimpleSketch_3353
 
         private void repaint()
         {
-            for (int i = 0; i < RectangleList.Count; i++)
+            for (int i = 0; i < shapeList.Count; i++)
+            {
+                g = panel2.CreateGraphics();
+                //shapeList.ElementAt<Shape>(i).Draw(shapeList.ElementAt<Shape>(i).startPoints, shapeList.ElementAt<Shape>(i).endPoints);
+                shapeList.ElementAt<Shape>(i).Redraw();
+            }
+
+            /*for (int i = 0; i < RectangleList.Count; i++)
             {
                 Rectangle rect = RectangleList.ElementAt<Rectangle>(i);
                 g = panel2.CreateGraphics();
                 g.DrawRectangle(p, rect);
-            }
+            }*/
 
-            for(int j=0; j<startEllPoints.Count; j++)
+            /*for(int j=0; j<startEllPoints.Count; j++)
             {
                 Point s = new Point(startEllPoints.ElementAt<Point>(j).X, startEllPoints.ElementAt<Point>(j).Y);
                 Point e = new Point(endEllPoints.ElementAt<Point>(j).X, endEllPoints.ElementAt<Point>(j).Y);
@@ -227,8 +205,12 @@ namespace SimpleSketch_3353
                 g.DrawLine(p, s, e);
             }
 
-            /*foreach (List<Point> stroke in ListOfStrokes)
+            foreach (List<Point> stroke in ListOfStrokes)
                 e.Graphics.DrawLines(p, stroke.ToArray());*/
+        }
+
+        public Panel getPanel2() {
+            return panel2;
         }
     }
 }
