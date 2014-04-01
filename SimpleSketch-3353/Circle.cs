@@ -13,16 +13,19 @@ namespace SimpleSketch_3353
         { }
 
         public override void Draw (Point s, Point e)
-        {
-            //endPoints.RemoveAt(endPoints.Count-1);
-            
+        { 
             view.getPanel2().Refresh();
             int length = Math.Abs(s.X - e.X);
             Rectangle EllipseCoords = new Rectangle(s.X, s.Y, e.X - s.X, e.X - s.X);
             view.g.DrawEllipse(view.p, EllipseCoords);
-            Point endPoints = new Point(e.X, e.Y);
+            endPoints = new Point(e.X, e.Y);
             Rectangle EllipseCoords2 = new Rectangle(s.X, s.Y, endPoints.X - s.X, endPoints.X - s.X);
             view.g.DrawEllipse(view.p, EllipseCoords2);
+        }
+        public override void Redraw()
+        {
+            Rectangle EllipseCoords3 = new Rectangle(startPoints.X, startPoints.Y, endPoints.X - startPoints.X, endPoints.X - startPoints.X);
+            view.g.DrawEllipse(view.p, EllipseCoords3);
         }
     }
 }

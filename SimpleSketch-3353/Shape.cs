@@ -12,6 +12,7 @@ namespace SimpleSketch_3353
         public Point startPoints = new Point();
         public Point endPoints = new Point();
         public Form1 view;
+        public Color penColor;
         abstract public void Draw(Point x, Point y);
         abstract public void Redraw();
     }

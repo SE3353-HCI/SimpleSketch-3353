@@ -33,6 +33,8 @@
             this.rectangle = new System.Windows.Forms.Button();
             this.ellipse = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.circle = new System.Windows.Forms.Button();
+            this.square = new System.Windows.Forms.Button();
             this.CursorButton = new System.Windows.Forms.Button();
             this.YellowColor = new System.Windows.Forms.Button();
             this.BlackColor = new System.Windows.Forms.Button();
@@ -69,7 +71,8 @@
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.circle);
+            this.panel1.Controls.Add(this.square);
             this.panel1.Controls.Add(this.CursorButton);
             this.panel1.Controls.Add(this.YellowColor);
             this.panel1.Controls.Add(this.BlackColor);
@@ -81,7 +84,22 @@
             this.panel1.Controls.Add(this.ellipse);
             this.panel1.Controls.Add(this.freeHand);
             this.panel1.Controls.Add(this.line);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // circle
+            // 
+            resources.ApplyResources(this.circle, "circle");
+            this.circle.Name = "circle";
+            this.circle.UseVisualStyleBackColor = true;
+            this.circle.Click += new System.EventHandler(this.circle_Click);
+            // 
+            // square
+            // 
+            resources.ApplyResources(this.square, "square");
+            this.square.Name = "square";
+            this.square.UseVisualStyleBackColor = true;
+            this.square.Click += new System.EventHandler(this.square_Click);
             // 
             // CursorButton
             // 
@@ -92,48 +110,48 @@
             // 
             // YellowColor
             // 
-            resources.ApplyResources(this.YellowColor, "YellowColor");
             this.YellowColor.BackColor = System.Drawing.Color.Yellow;
+            resources.ApplyResources(this.YellowColor, "YellowColor");
             this.YellowColor.Name = "YellowColor";
             this.YellowColor.UseVisualStyleBackColor = false;
             this.YellowColor.Click += new System.EventHandler(this.YellowColor_Click);
             // 
             // BlackColor
             // 
-            resources.ApplyResources(this.BlackColor, "BlackColor");
             this.BlackColor.BackColor = System.Drawing.Color.Black;
+            resources.ApplyResources(this.BlackColor, "BlackColor");
             this.BlackColor.Name = "BlackColor";
             this.BlackColor.UseVisualStyleBackColor = false;
             this.BlackColor.Click += new System.EventHandler(this.BlackColor_Click);
             // 
             // PurpleColor
             // 
-            resources.ApplyResources(this.PurpleColor, "PurpleColor");
             this.PurpleColor.BackColor = System.Drawing.Color.Purple;
+            resources.ApplyResources(this.PurpleColor, "PurpleColor");
             this.PurpleColor.Name = "PurpleColor";
             this.PurpleColor.UseVisualStyleBackColor = false;
             this.PurpleColor.Click += new System.EventHandler(this.PurpleColor_Click);
             // 
             // BlueColor
             // 
-            resources.ApplyResources(this.BlueColor, "BlueColor");
             this.BlueColor.BackColor = System.Drawing.Color.Blue;
+            resources.ApplyResources(this.BlueColor, "BlueColor");
             this.BlueColor.Name = "BlueColor";
             this.BlueColor.UseVisualStyleBackColor = false;
             this.BlueColor.Click += new System.EventHandler(this.BlueColor_Click);
             // 
             // GreenColor
             // 
-            resources.ApplyResources(this.GreenColor, "GreenColor");
             this.GreenColor.BackColor = System.Drawing.Color.Green;
+            resources.ApplyResources(this.GreenColor, "GreenColor");
             this.GreenColor.Name = "GreenColor";
             this.GreenColor.UseVisualStyleBackColor = false;
             this.GreenColor.Click += new System.EventHandler(this.GreenColor_Click);
             // 
             // RedColor
             // 
-            resources.ApplyResources(this.RedColor, "RedColor");
             this.RedColor.BackColor = System.Drawing.Color.Red;
+            resources.ApplyResources(this.RedColor, "RedColor");
             this.RedColor.ForeColor = System.Drawing.Color.Red;
             this.RedColor.Name = "RedColor";
             this.RedColor.UseVisualStyleBackColor = false;
@@ -148,6 +166,7 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
@@ -190,6 +209,8 @@
         private System.Windows.Forms.Button YellowColor;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button CursorButton;
+        private System.Windows.Forms.Button circle;
+        private System.Windows.Forms.Button square;
     }
 }
 

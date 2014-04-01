@@ -70,6 +70,7 @@ namespace SimpleSketch_3353
                 currentStroke.Add(e.Location);
                 ListOfStrokes.Add(currentStroke);*/
                 currentShape = new Freehand();
+                currentShape.penColor = p.Color;
             }
 
             if(selectedShape.Equals("Rectangle"))
@@ -77,18 +78,36 @@ namespace SimpleSketch_3353
                 xCoord = e.X;
                 yCoord = e.Y;
                 currentShape = new MyRectangle(start, e.Location);
+                currentShape.penColor = p.Color;
             }
 
             if(selectedShape.Equals("Ellipse"))
             {
                 start = new Point(e.X, e.Y);
                 currentShape = new Ellipse(start, e.Location);
+                currentShape.penColor = p.Color;
+            }
+
+            if (selectedShape.Equals("Circle"))
+            {
+                start = new Point(e.X, e.Y);
+                currentShape = new Circle(start, e.Location);
+                currentShape.penColor = p.Color;
+            }
+
+            if (selectedShape.Equals("Square"))
+            {
+                xCoord = e.X;
+                yCoord = e.Y;
+                currentShape = new Square(start, e.Location);
+                currentShape.penColor = p.Color;
             }
 
             if(selectedShape.Equals("StraightLine"))
             {
                 start = new Point(e.X, e.Y);
                 currentShape = new Line(start, e.Location);
+                currentShape.penColor = p.Color;
             }
 
             if(selectedShape.Equals("Cursor"))
@@ -143,6 +162,15 @@ namespace SimpleSketch_3353
             selectedShape = "Cursor";
         }
 
+        private void square_Click(object sender, EventArgs e)
+        {
+            selectedShape = "Square";
+        }
+
+        private void circle_Click(object sender, EventArgs e)
+        {
+            selectedShape = "Circle";
+        }
         private void RedColor_Click(object sender, EventArgs e)
         {
             p.Color = Color.Red;
@@ -179,8 +207,10 @@ namespace SimpleSketch_3353
             {
                 g = panel2.CreateGraphics();
                 //shapeList.ElementAt<Shape>(i).Draw(shapeList.ElementAt<Shape>(i).startPoints, shapeList.ElementAt<Shape>(i).endPoints);
+                p.Color = shapeList.ElementAt<Shape>(i).penColor;
                 shapeList.ElementAt<Shape>(i).Redraw();
             }
+            p.Color = currentShape.penColor;
 
             /*for (int i = 0; i < RectangleList.Count; i++)
             {
@@ -212,5 +242,7 @@ namespace SimpleSketch_3353
         public Panel getPanel2() {
             return panel2;
         }
+
+
     }
 }

@@ -12,9 +12,10 @@ namespace SimpleSketch_3353
     {
         public Line(Point s, Point e)
         {
+            view = (Form1) Form1.ActiveForm;
+            penColor = view.p.Color;
             startPoints = (s);
             endPoints = e;
-            view = (Form1) Form1.ActiveForm;
         }
         public override void Draw(Point s, Point e)
         {

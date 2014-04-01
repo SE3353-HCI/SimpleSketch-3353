@@ -14,8 +14,9 @@ namespace SimpleSketch_3353
         public List<Point> stroke;
         PaintEventArgs paintEvent;
         public Freehand()
-         {
+         { 
              view = (Form1)Form1.ActiveForm;
+             penColor = view.p.Color;
              stroke = new List<Point>();
              paintEvent = new PaintEventArgs(view.g, view.getPanel2().DisplayRectangle);
          }

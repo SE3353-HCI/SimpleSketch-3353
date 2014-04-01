@@ -12,9 +12,10 @@ namespace SimpleSketch_3353
     {
         public Ellipse(Point s, Point e)
         {
-            startPoints = (s);
-            endPoints = e;
             view = (Form1) Form1.ActiveForm;
+            penColor = view.p.Color;
+            startPoints = (s);
+            endPoints = e; 
         }
         public override void Draw(Point s, Point e)
         {

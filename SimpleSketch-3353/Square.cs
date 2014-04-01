@@ -17,16 +17,17 @@ namespace SimpleSketch_3353
             
             view.getPanel2().Refresh();
             int width = e.X - view.xCoord, height = e.Y - view.yCoord;
-            Rectangle r = new Rectangle(Math.Min(e.X, view.xCoord), Math.Min(e.X, view.xCoord), Math.Abs(e.X - view.xCoord), Math.Abs(e.X - view.xCoord));
+            Rectangle r = new Rectangle(Math.Min(e.X, view.xCoord), Math.Min(e.Y, view.yCoord), Math.Abs(e.X - view.xCoord), Math.Abs(e.X - view.xCoord));
+            startPoints = new Point(view.xCoord, view.yCoord);
             view.g = view.getPanel2().CreateGraphics();
             view.g.DrawRectangle(view.p, r);
             endPoints = e;
         }
         public override void Redraw()
         {
-            //Rectangle r = new Rectangle(Math.Min(e.X, view.xCoord), Math.Min(e.X, view.xCoord), Math.Abs(e.X - view.xCoord), Math.Abs(e.X - view.xCoord));
-            //view.g = view.getPanel2().CreateGraphics();
-            //view.g.DrawRectangle(view.p, r);
+            Rectangle r = new Rectangle(Math.Min(endPoints.X, startPoints.X), Math.Min(endPoints.Y, startPoints.Y), Math.Abs(endPoints.X - startPoints.X), Math.Abs(endPoints.X - startPoints.X));
+            view.g = view.getPanel2().CreateGraphics();
+            view.g.DrawRectangle(view.p, r);
         }
     }
 }
