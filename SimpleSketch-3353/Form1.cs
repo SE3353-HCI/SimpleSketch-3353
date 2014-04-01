@@ -285,7 +285,6 @@ namespace SimpleSketch_3353
             foreach (List<Point> stroke in ListOfStrokes)
                 e.Graphics.DrawLines(p, stroke.ToArray());*/
         }
-
         public Panel getPanel2() {
             return panel2;
         }
