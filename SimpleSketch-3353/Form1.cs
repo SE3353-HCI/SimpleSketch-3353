@@ -85,7 +85,8 @@ namespace SimpleSketch_3353
                 panel2.Refresh();
                 g.DrawLine(p, start,end);
                 end = new Point(e.X, e.Y);
-                lineColors.Add(p.Color);
+                Color c = p.Color;
+                lineColors.Add(c);
                 g.DrawLine(p, start, end);
             }
 
@@ -229,6 +230,11 @@ namespace SimpleSketch_3353
 
             /*foreach (List<Point> stroke in ListOfStrokes)
                 e.Graphics.DrawLines(p, stroke.ToArray());*/
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

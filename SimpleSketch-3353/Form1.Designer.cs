@@ -43,6 +43,7 @@
             this.freeHand = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.Clear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +81,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.Clear);
             this.panel1.Controls.Add(this.CursorButton);
             this.panel1.Controls.Add(this.YellowColor);
             this.panel1.Controls.Add(this.BlackColor);
@@ -203,6 +205,16 @@
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
+            // Clear
+            // 
+            this.Clear.Location = new System.Drawing.Point(10, 371);
+            this.Clear.Name = "Clear";
+            this.Clear.Size = new System.Drawing.Size(52, 33);
+            this.Clear.TabIndex = 11;
+            this.Clear.Text = "Clear";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -234,6 +246,7 @@
         private System.Windows.Forms.Button YellowColor;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button CursorButton;
+        private System.Windows.Forms.Button Clear;
     }
 }
 
