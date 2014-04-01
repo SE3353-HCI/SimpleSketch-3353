@@ -89,11 +89,10 @@ namespace SimpleSketch_3353
                 g.DrawLine(p, start, end);
             }
 
-            if(Shape.Equals("Cursor"))
+            if(isDrawing && Shape.Equals("Cursor"))
             {
-
+                
             }
-
             repaint();
         }
 
@@ -121,6 +120,12 @@ namespace SimpleSketch_3353
             if(Shape.Equals("StraightLine"))
             {
                 start = new Point(e.X, e.Y);
+            }
+
+            if(Shape.Equals("Cursor"))
+            {
+                xCoord = e.X;
+                yCoord = e.Y;
             }
         }
 
@@ -203,9 +208,7 @@ namespace SimpleSketch_3353
             {
                 Rectangle rect = RectangleList.ElementAt<Rectangle>(i);
                 g = panel2.CreateGraphics();
-                
                 g.DrawRectangle(p, rect);
-           
             }
 
             for(int j=0; j<startEllPoints.Count; j++)

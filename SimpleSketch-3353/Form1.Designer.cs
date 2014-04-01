@@ -33,6 +33,7 @@
             this.rectangle = new System.Windows.Forms.Button();
             this.ellipse = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CursorButton = new System.Windows.Forms.Button();
             this.YellowColor = new System.Windows.Forms.Button();
             this.BlackColor = new System.Windows.Forms.Button();
             this.PurpleColor = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.freeHand = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.CursorButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,11 +96,21 @@
             this.panel1.Size = new System.Drawing.Size(74, 415);
             this.panel1.TabIndex = 3;
             // 
+            // CursorButton
+            // 
+            this.CursorButton.Location = new System.Drawing.Point(12, 9);
+            this.CursorButton.Name = "CursorButton";
+            this.CursorButton.Size = new System.Drawing.Size(50, 45);
+            this.CursorButton.TabIndex = 10;
+            this.CursorButton.Text = "Cursor";
+            this.CursorButton.UseVisualStyleBackColor = true;
+            this.CursorButton.Click += new System.EventHandler(this.CursorButton_Click);
+            // 
             // YellowColor
             // 
             this.YellowColor.BackColor = System.Drawing.Color.Yellow;
             this.YellowColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.YellowColor.Location = new System.Drawing.Point(39, 329);
+            this.YellowColor.Location = new System.Drawing.Point(38, 329);
             this.YellowColor.Name = "YellowColor";
             this.YellowColor.Size = new System.Drawing.Size(25, 25);
             this.YellowColor.TabIndex = 9;
@@ -192,16 +202,6 @@
             this.listView1.Size = new System.Drawing.Size(96, 350);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // CursorButton
-            // 
-            this.CursorButton.Location = new System.Drawing.Point(12, 9);
-            this.CursorButton.Name = "CursorButton";
-            this.CursorButton.Size = new System.Drawing.Size(50, 45);
-            this.CursorButton.TabIndex = 10;
-            this.CursorButton.Text = "Cursor";
-            this.CursorButton.UseVisualStyleBackColor = true;
-            this.CursorButton.Click += new System.EventHandler(this.CursorButton_Click);
             // 
             // Form1
             // 
