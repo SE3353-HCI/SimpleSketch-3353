@@ -238,18 +238,8 @@ namespace SimpleSketch_3353
             foreach (List<Point> stroke in ListOfStrokes)
                 e.Graphics.DrawLines(p, stroke.ToArray());*/
         }
-
-<<<<<<< HEAD
-        private void Clear_Click(object sender, EventArgs e)
-        {
-            
-        }
-=======
         public Panel getPanel2() {
             return panel2;
         }
-
-
->>>>>>> 7751161b5b38252ff9df04d9663ce609ccf6e62e
     }
 }
