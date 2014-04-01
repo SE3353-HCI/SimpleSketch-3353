@@ -33,5 +33,9 @@ namespace SimpleSketch_3353
             paintEvent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             paintEvent.Graphics.DrawLines(view.p, stroke.ToArray());
          }
+         public override bool isWithin(Point x)
+         {
+             return true;
+         }
     }
 }

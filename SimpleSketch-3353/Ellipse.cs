@@ -31,5 +31,12 @@ namespace SimpleSketch_3353
             Rectangle EllipseCoords3 = new Rectangle(startPoints.X, startPoints.Y, endPoints.X - startPoints.X, endPoints.Y - startPoints.Y);
             view.g.DrawEllipse(view.p, EllipseCoords3);
         }
+        public override bool isWithin(Point x)
+        {
+            if ((Math.Min(startPoints.X,endPoints.X) < x.X) && ((Math.Max(startPoints.X,endPoints.X) > x.X) && ((Math.Min(startPoints.Y,endPoints.Y) < x.Y)) && ((Math.Max(startPoints.Y,endPoints.Y) > x.Y))))
+                return true;
+            else
+                return false;
+        }
     }
 }

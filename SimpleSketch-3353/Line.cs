@@ -29,5 +29,23 @@ namespace SimpleSketch_3353
         {
             view.g.DrawLine(view.p, startPoints, endPoints);
         }
+
+        public override bool isWithin(Point x)
+        {
+            //List<Point> inLine = new List<Point>();
+            Point currentPoint = new Point();
+            double slope = (Double)(startPoints.Y - endPoints.Y)/(startPoints.X-endPoints.X);
+            //inLine.Add(startPoints);
+            currentPoint = startPoints; 
+            for (int xx = startPoints.X, y = startPoints.Y; y <= endPoints.Y; y++)
+            {
+                //currentPoint = new Point(xx, y);
+                //if (x.X == currentPoint.X && x.Y == currentPoint.Y)
+                //    return true;
+                //   
+                //xx += (int)slope;
+            }
+            return false;
+        }
     }
 }
