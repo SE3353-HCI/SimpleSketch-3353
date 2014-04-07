@@ -33,5 +33,12 @@ namespace SimpleSketch_3353
             view.g = view.getPanel2().CreateGraphics();
             view.g.DrawRectangle(view.p, r);
         }
+        public override bool isWithin(Point x)
+        {
+            if ((Math.Min(startPoints.X,endPoints.X) < x.X) && (Math.Max(startPoints.X,endPoints.X) > x.X) && (Math.Min(startPoints.Y,endPoints.Y) < x.Y) && (Math.Max(startPoints.Y,endPoints.Y) > x.Y))
+                return true;
+            else
+                return false;
+        }
     }
 }

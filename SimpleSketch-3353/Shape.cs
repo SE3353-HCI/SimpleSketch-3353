@@ -15,5 +15,6 @@ namespace SimpleSketch_3353
         public Color penColor;
         abstract public void Draw(Point x, Point y);
         abstract public void Redraw();
+        abstract public Boolean isWithin(Point x);
     }
 }

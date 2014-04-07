@@ -37,5 +37,9 @@ namespace SimpleSketch_3353
          {
              return stroke.ToArray();
          }
+         public override bool isWithin(Point x)
+         {
+             return true;
+         }
     }
 }
