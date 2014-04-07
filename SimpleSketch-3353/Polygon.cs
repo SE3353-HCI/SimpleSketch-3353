@@ -34,6 +34,11 @@ namespace SimpleSketch_3353
             view.g.DrawLine(view.p, startPoints, endPoints);
         }
 
+        public override bool isWithin(Point p)
+        {
+            return false;
+        }
+
         public void addFinishedLine(Point s, Point e)
         {
             Line l = new Line(s, endPoints);
