@@ -44,5 +44,10 @@ namespace SimpleSketch_3353
             Line l = new Line(s, endPoints);
             lines.Add(l);
         }
+
+        public override bool isWithin(Point x)
+        {
+            return false;
+        }
     }
 }
