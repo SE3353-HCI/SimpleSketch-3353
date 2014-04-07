@@ -46,6 +46,7 @@ namespace SimpleSketch_3353
         {
             InitializeComponent();
             g = panel2.CreateGraphics();
+            p.Color = Color.Black;
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -69,7 +70,7 @@ namespace SimpleSketch_3353
                 repaint(); 
             }
 
-            if (isDrawing && selectedShape == "freeHand")
+            if (isDrawing && selectedShape.Equals("freeHand"))
             {
                 currentShape.Draw(start, e.Location);
                 Freehand fHand = (Freehand)currentShape;
@@ -124,7 +125,6 @@ namespace SimpleSketch_3353
                     /*currentStroke = new List<Point>();
                     currentStroke.Add(e.Location);
                     ListOfStrokes.Add(currentStroke);*/
-
                     currentShape = new Freehand();
                     currentShape.penColor = p.Color;
                 }
