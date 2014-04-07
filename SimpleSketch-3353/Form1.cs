@@ -30,7 +30,6 @@ namespace SimpleSketch_3353
         public Pen p = new Pen(Color.Black, 1);
         bool lineDrawn=false;
         bool isDrawing;
-        bool isSelecting = false;
         bool isMoving = false;
         bool cursorMode = false;
         bool shapeMode = true;
@@ -187,7 +186,6 @@ namespace SimpleSketch_3353
             }
             if (cursorMode)
             {
-                isSelecting = true;
                 for (int i = shapeList.Count-1; i>=0; i--)
                 {
                     if (shapeList.ElementAt<Shape>(i).isWithin(e.Location))
@@ -199,7 +197,7 @@ namespace SimpleSketch_3353
                     }
                 }
 
-                if (isSelecting && isMoving)
+                if (isMoving)
                 {
                     int xDiff = start.X - e.X;
                     int yDiff = start.Y - e.Y;
@@ -247,7 +245,6 @@ namespace SimpleSketch_3353
             }*/
 
             shapeList.Add(currentShape);
-            isSelecting = false;
             isMoving = false;
             currentShapePosition = 1;
             repaint();
