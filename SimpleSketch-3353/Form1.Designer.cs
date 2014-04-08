@@ -33,6 +33,7 @@
             this.rectangle = new System.Windows.Forms.Button();
             this.ellipse = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.polygon = new System.Windows.Forms.Button();
             this.circle = new System.Windows.Forms.Button();
             this.square = new System.Windows.Forms.Button();
             this.CursorButton = new System.Windows.Forms.Button();
@@ -45,7 +46,6 @@
             this.freeHand = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.polygon = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,6 +88,13 @@
             this.panel1.Controls.Add(this.line);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
+            // 
+            // polygon
+            // 
+            resources.ApplyResources(this.polygon, "polygon");
+            this.polygon.Name = "polygon";
+            this.polygon.UseVisualStyleBackColor = true;
+            this.polygon.Click += new System.EventHandler(this.polygon_Click);
             // 
             // circle
             // 
@@ -173,7 +180,6 @@
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            this.panel2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseClick);
             this.panel2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDoubleClick);
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
@@ -184,13 +190,6 @@
             resources.ApplyResources(this.listView1, "listView1");
             this.listView1.Name = "listView1";
             this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // polygon
-            // 
-            resources.ApplyResources(this.polygon, "polygon");
-            this.polygon.Name = "polygon";
-            this.polygon.UseVisualStyleBackColor = true;
-            this.polygon.Click += new System.EventHandler(this.polygon_Click);
             // 
             // Form1
             // 
