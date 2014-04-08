@@ -245,8 +245,8 @@ namespace SimpleSketch_3353
                 startLinePoints.Add(start);
                 endLinePoints.Add(end);
             }*/
-
-            shapeList.Add(currentShape);
+            if (shapeMode)
+                shapeList.Add(currentShape);
             isMoving = false;
             currentShapePosition = 1;
             repaint();
@@ -420,9 +420,9 @@ namespace SimpleSketch_3353
         }
         private void panel2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (cursorMode && shapeList.Count>0 && e.Button == MouseButtons.Left)
+            if (cursorMode && shapeList.Count > 0 && e.Button == MouseButtons.Left)
             {
-                for (int i = shapeList.Count - 1; i >= 0; i--)
+                for (int i = (shapeList.Count-1); i >= 0; i--)
                 {
                     if (shapeList.ElementAt<Shape>(i).isWithin(e.Location))
                     {
