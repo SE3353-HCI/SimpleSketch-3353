@@ -15,8 +15,6 @@ namespace SimpleSketch_3353
     {
         public Graphics g;
         public int xCoord=0, yCoord = 0;
-        //public List<List<Point>> ListOfStrokes = new List<List<Point>>();
-        //public List<Point> currentStroke;
         List<Point> startEllPoints = new List<Point>();
         List<Point> endEllPoints = new List<Point>();
         List<Point> startLinePoints = new List<Point>();
@@ -26,7 +24,6 @@ namespace SimpleSketch_3353
         
         List<Freehand> freehandList = new List<Freehand>();
 
-        Rectangle r, EllipseCoords2;
         public Pen p = new Pen(Color.Black, 1);
         bool lineDrawn=false;
         bool isDrawing = false;
@@ -50,19 +47,6 @@ namespace SimpleSketch_3353
             p.Color = Color.Black;
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-            /*e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            if(selectedShape.Equals("freeHand"))
-            {
-                foreach (Freehand fhand in freehandList)
-                    e.Graphics.DrawLines(p, fhand.getPointList());
-            }*/
-
-            //paintEvent = e;
-        }
-
         private void panel2_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDrawing)
@@ -76,9 +60,7 @@ namespace SimpleSketch_3353
                 currentShape.Draw(start, e.Location);
                 Freehand fHand = (Freehand)currentShape;
                 g.DrawLines(p, fHand.getPointList());
-                //freehandList.Add((Freehand)currentShape);
                 repaint();
-                //Refresh();
             }
 
             if (isMoving)
@@ -96,40 +78,6 @@ namespace SimpleSketch_3353
             }
         }
 
-        /*private void panel2_MouseDown(object sender, MouseEventArgs e)
-        {
-            isDrawing = true;
-            if(selectedShape.Equals("freeHand"))
-            {
-                currentStroke = new List<Point>();
-                currentStroke.Add(e.Location);
-                ListOfStrokes.Add(currentStroke);
-                
-                currentShape = new Freehand();
-                currentShape.penColor = p.Color;
-            }
-
-            if(lineDrawn)
-            {
-                Point Start = new Point(polyEndX, polyEndY);
-                currentShape.Draw(Start, e.Location);
-            }
-
-            if (isSelecting && isMoving)
-            {
-                int xDiff = start.X - e.X;
-                int yDiff = start.Y - e.Y;
-                shapeList.ElementAt<Shape>(currentShapePosition).startPoints.X -= xDiff;
-                shapeList.ElementAt<Shape>(currentShapePosition).startPoints.Y -= yDiff;
-                shapeList.ElementAt<Shape>(currentShapePosition).endPoints.X -= xDiff;
-                shapeList.ElementAt<Shape>(currentShapePosition).endPoints.Y -= yDiff;
-                start = new Point(e.X, e.Y);
-                currentShape = shapeList.ElementAt<Shape>(currentShapePosition);
-                panel2.Refresh();
-                repaint();
-            }   
-        }*/
-
         private void panel2_MouseDown(object sender, MouseEventArgs e)
         {
             if (shapeMode)
@@ -138,9 +86,6 @@ namespace SimpleSketch_3353
                 start = new Point(e.X, e.Y);
                 if (selectedShape.Equals("freeHand"))
                 {
-                    /*currentStroke = new List<Point>();
-                    currentStroke.Add(e.Location);
-                    ListOfStrokes.Add(currentStroke);*/
                     currentShape = new Freehand();
                     currentShape.penColor = p.Color;
                     freeHandMode = true;
@@ -229,24 +174,6 @@ namespace SimpleSketch_3353
                 polyEndY = e.Location.Y;
                 currentShape = p;
             }
-            
-            /*RectangleList.Add(r);
-
-            if(selectedShape.Equals("Ellipse"))
-=======
-            if (shapeMode)
->>>>>>> aef200683580b85a616b8d9a528a35d3d73d3e42
-            {
-                isDrawing = false;
-                shapeList.Add(currentShape);
-                repaint();
-            }
-            if (cursorMode)
-            {
-<<<<<<< HEAD
-                startLinePoints.Add(start);
-                endLinePoints.Add(end);
-            }*/
             if (freeHandMode)
             {
                 freehandList.Add((Freehand)currentShape);
@@ -348,65 +275,22 @@ namespace SimpleSketch_3353
             for (int i = 0; i < shapeList.Count; i++)
             {
                 g = panel2.CreateGraphics();
-                //shapeList.ElementAt<Shape>(i).Draw(shapeList.ElementAt<Shape>(i).startPoints, shapeList.ElementAt<Shape>(i).endPoints);
                 p.Color = shapeList.ElementAt<Shape>(i).penColor;
                 shapeList.ElementAt<Shape>(i).Redraw();
             }
 
             foreach (Freehand fhand in freehandList)
+            {
+                p.Color = fhand.penColor;
                 g.DrawLines(p, fhand.getPointList());
+            }
             
             p.Color = currentShape.penColor;
-
-            /*for (int i = 0; i < RectangleList.Count; i++)
-            {
-                Rectangle rect = RectangleList.ElementAt<Rectangle>(i);
-                g = panel2.CreateGraphics();
-                g.DrawRectangle(p, rect);
-            }*/
-
-            /*for(int j=0; j<startEllPoints.Count; j++)
-            {
-                Point s = new Point(startEllPoints.ElementAt<Point>(j).X, startEllPoints.ElementAt<Point>(j).Y);
-                Point e = new Point(endEllPoints.ElementAt<Point>(j).X, endEllPoints.ElementAt<Point>(j).Y);
-                EllipseCoords2 = new Rectangle(s.X,s.Y, e.X - s.X, e.Y - s.Y);
-                g.DrawEllipse(p, EllipseCoords2);
-            }
-
-            for (int k = 0; k < startLinePoints.Count; k++)
-            {
-                Point s = new Point(startLinePoints.ElementAt<Point>(k).X, startLinePoints.ElementAt<Point>(k).Y);
-                Point e = new Point(endLinePoints.ElementAt<Point>(k).X, endLinePoints.ElementAt<Point>(k).Y);
-                p.Color = lineColors.ElementAt<Color>(k);
-                g.DrawLine(p, s, e);
-            }
-
-            foreach (List<Point> stroke in ListOfStrokes)
-                e.Graphics.DrawLines(p, stroke.ToArray());*/
         }
 
-        public void drawFreeHand(Point[] ptArray)
+        public void drawFreeHand(Freehand fhand)
         {
-            //paintEvent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            //paintEvent.Graphics.DrawLines(p, ptArray);
-            //g.SmoothingMode = SmoothingMode.AntiAlias;
-            //g.DrawLines(p, ptArray);
-
-            /*g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            foreach (List<Point> stroke in ListOfStrokes)
-            {
-                try
-                {
-                    g.DrawLines(p, stroke.ToArray());
-                }
-
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine("Bad Param: " + e.ParamName);
-                    Console.WriteLine("Msg: " + e.Message);
-                }
-            }*/
+            
         }
 
         public Panel getPanel2() {

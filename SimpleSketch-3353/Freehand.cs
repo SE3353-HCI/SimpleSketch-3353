@@ -23,13 +23,13 @@ namespace SimpleSketch_3353
          {
             stroke.Add(e);
             //Point[] pArray = stroke.ToArray();
-            //view.drawFreeHand(pArray);
+            //view.drawFreeHand(this);
             //view.Refresh();
          }
          public override void Redraw()
          {
             //Point[] pArray = stroke.ToArray();
-            //view.drawFreeHand(pArray);
+            //view.drawFreeHand(this);
          }
 
          public Point[] getPointList()
