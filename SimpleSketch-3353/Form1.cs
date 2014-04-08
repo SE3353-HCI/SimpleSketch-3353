@@ -455,6 +455,22 @@ namespace SimpleSketch_3353
         panel2.Refresh(); 
         repaint();
         }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            for (int i = shapeList.Count-1; i >=0; i--)
+            {
+                shapeList.RemoveAt(i);
+            }
+            repaint();
+            panel2.Refresh();
+            /*for (int i = 0; i < shapeList.Count; i++)
+            {
+                g = panel2.CreateGraphics();
+                p.Color = shapeList.ElementAt<Shape>(i).penColor;
+                shapeList.ElementAt<Shape>(i).Redraw();
+            }*/
+        }
         
     }
 }

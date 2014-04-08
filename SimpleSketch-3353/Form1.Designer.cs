@@ -46,6 +46,7 @@
             this.freeHand = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.Clear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,10 +192,18 @@
             this.listView1.Name = "listView1";
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
+            // Clear
+            // 
+            resources.ApplyResources(this.Clear, "Clear");
+            this.Clear.Name = "Clear";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Clear);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -223,6 +232,7 @@
         private System.Windows.Forms.Button circle;
         private System.Windows.Forms.Button square;
         private System.Windows.Forms.Button polygon;
+        private System.Windows.Forms.Button Clear;
     }
 }
 
