@@ -29,10 +29,11 @@ namespace SimpleSketch_3353
         Rectangle r, EllipseCoords2;
         public Pen p = new Pen(Color.Black, 1);
         bool lineDrawn=false;
-        bool isDrawing;
+        bool isDrawing = false;
         bool isMoving = false;
         bool cursorMode = false;
         bool shapeMode = true;
+        bool freeHandMode = false;
         int currentShapePosition = 0;
         public int polyEndX, polyEndY;
 
@@ -51,13 +52,13 @@ namespace SimpleSketch_3353
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            /*e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             if(selectedShape.Equals("freeHand"))
             {
                 foreach (Freehand fhand in freehandList)
                     e.Graphics.DrawLines(p, fhand.getPointList());
-            }
+            }*/
 
             //paintEvent = e;
         }
@@ -75,6 +76,7 @@ namespace SimpleSketch_3353
                 currentShape.Draw(start, e.Location);
                 Freehand fHand = (Freehand)currentShape;
                 g.DrawLines(p, fHand.getPointList());
+                //freehandList.Add((Freehand)currentShape);
                 repaint();
                 //Refresh();
             }
@@ -91,8 +93,7 @@ namespace SimpleSketch_3353
                 currentShape = shapeList.ElementAt<Shape>(currentShapePosition);
                 panel2.Refresh();
                 repaint();
-            }   
-            
+            }
         }
 
         /*private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -142,6 +143,7 @@ namespace SimpleSketch_3353
                     ListOfStrokes.Add(currentStroke);*/
                     currentShape = new Freehand();
                     currentShape.penColor = p.Color;
+                    freeHandMode = true;
                 }
 
                 if(selectedShape.Equals("Rectangle"))
@@ -245,7 +247,12 @@ namespace SimpleSketch_3353
                 startLinePoints.Add(start);
                 endLinePoints.Add(end);
             }*/
-            if (shapeMode)
+            if (freeHandMode)
+            {
+                freehandList.Add((Freehand)currentShape);
+                freeHandMode = false;
+            }
+            else if (shapeMode)
                 shapeList.Add(currentShape);
             isMoving = false;
             currentShapePosition = 1;
@@ -345,6 +352,10 @@ namespace SimpleSketch_3353
                 p.Color = shapeList.ElementAt<Shape>(i).penColor;
                 shapeList.ElementAt<Shape>(i).Redraw();
             }
+
+            foreach (Freehand fhand in freehandList)
+                g.DrawLines(p, fhand.getPointList());
+            
             p.Color = currentShape.penColor;
 
             /*for (int i = 0; i < RectangleList.Count; i++)

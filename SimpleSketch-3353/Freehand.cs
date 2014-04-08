@@ -12,7 +12,6 @@ namespace SimpleSketch_3353
     public class Freehand : Shape
     {
         public List<Point> stroke;
-        PaintEventArgs paintEvent;
         public Freehand()
          { 
              view = (Form1)Form1.ActiveForm;
