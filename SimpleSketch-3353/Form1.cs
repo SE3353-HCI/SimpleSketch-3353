@@ -75,6 +75,7 @@ namespace SimpleSketch_3353
                 currentShape.Draw(start, e.Location);
                 Freehand fHand = (Freehand)currentShape;
                 g.DrawLines(p, fHand.getPointList());
+                repaint();
                 //Refresh();
             }
 
