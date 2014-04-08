@@ -77,6 +77,20 @@ namespace SimpleSketch_3353
                 g.DrawLines(p, fHand.getPointList());
                 //Refresh();
             }
+
+            if (isMoving)
+            {
+                int xDiff = start.X - e.X;
+                int yDiff = start.Y - e.Y;
+                shapeList.ElementAt<Shape>(currentShapePosition).startPoints.X -= xDiff;
+                shapeList.ElementAt<Shape>(currentShapePosition).startPoints.Y -= yDiff;
+                shapeList.ElementAt<Shape>(currentShapePosition).endPoints.X -= xDiff;
+                shapeList.ElementAt<Shape>(currentShapePosition).endPoints.Y -= yDiff;
+                start = new Point(e.X, e.Y);
+                currentShape = shapeList.ElementAt<Shape>(currentShapePosition);
+                panel2.Refresh();
+                repaint();
+            }   
             
         }
 
@@ -184,7 +198,8 @@ namespace SimpleSketch_3353
                     lineDrawn = true;
                 }
             }
-            if (cursorMode)
+            
+            else if (cursorMode)
             {
                 for (int i = shapeList.Count-1; i>=0; i--)
                 {
@@ -196,20 +211,6 @@ namespace SimpleSketch_3353
                         break;
                     }
                 }
-
-                if (isMoving)
-                {
-                    int xDiff = start.X - e.X;
-                    int yDiff = start.Y - e.Y;
-                    shapeList.ElementAt<Shape>(currentShapePosition).startPoints.X -= xDiff;
-                    shapeList.ElementAt<Shape>(currentShapePosition).startPoints.Y -= yDiff;
-                    shapeList.ElementAt<Shape>(currentShapePosition).endPoints.X -= xDiff;
-                    shapeList.ElementAt<Shape>(currentShapePosition).endPoints.Y -= yDiff;
-                    start = new Point(e.X, e.Y);
-                    currentShape = shapeList.ElementAt<Shape>(currentShapePosition);
-                    panel2.Refresh();
-                    repaint();
-                }   
             }
         }
 
