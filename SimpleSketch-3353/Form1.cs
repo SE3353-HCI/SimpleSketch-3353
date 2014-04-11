@@ -374,18 +374,10 @@ namespace SimpleSketch_3353
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            for (int i = shapeList.Count-1; i >=0; i--)
-            {
-                shapeList.RemoveAt(i);
-            }
+            shapeList.Clear();
+            freehandList.Clear();
             repaint();
             panel2.Refresh();
-            /*for (int i = 0; i < shapeList.Count; i++)
-            {
-                g = panel2.CreateGraphics();
-                p.Color = shapeList.ElementAt<Shape>(i).penColor;
-                shapeList.ElementAt<Shape>(i).Redraw();
-            }*/
         }
         
     }
