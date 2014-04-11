@@ -15,16 +15,11 @@ namespace SimpleSketch_3353
     {
         public Graphics g;
         public int xCoord=0, yCoord = 0;
-        List<Point> startEllPoints = new List<Point>();
-        List<Point> endEllPoints = new List<Point>();
-        List<Point> startLinePoints = new List<Point>();
-        List<Point> endLinePoints = new List<Point>();
-        List<Shape> shapeList= new List<Shape>();
-        List<Color> lineColors = new List<Color>();
+        public Pen p = new Pen(Color.Black, 1);
         
+        List<Shape> shapeList= new List<Shape>();
         List<Freehand> freehandList = new List<Freehand>();
 
-        public Pen p = new Pen(Color.Black, 1);
         bool isDrawingPolygon=false;
         bool isDrawing = false;
         bool isMoving = false;
@@ -37,7 +32,6 @@ namespace SimpleSketch_3353
         public Point start, end;
         public Shape currentShape;
         public String selectedShape="freeHand";
-        public PaintEventArgs paintEvent;
 
 
         public Form1()
@@ -317,11 +311,6 @@ namespace SimpleSketch_3353
             }
             
             p.Color = currentShape.penColor;
-        }
-
-        public void drawFreeHand(Freehand fhand)
-        {
-            
         }
 
         public Panel getPanel2() {
