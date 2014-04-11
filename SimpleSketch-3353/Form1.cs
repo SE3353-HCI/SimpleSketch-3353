@@ -25,7 +25,7 @@ namespace SimpleSketch_3353
         List<Freehand> freehandList = new List<Freehand>();
 
         public Pen p = new Pen(Color.Black, 1);
-        bool lineDrawn=false;
+        bool isDrawingPolygon=false;
         bool isDrawing = false;
         bool isMoving = false;
         bool cursorMode = false;
@@ -67,10 +67,19 @@ namespace SimpleSketch_3353
             {
                 int xDiff = start.X - e.X;
                 int yDiff = start.Y - e.Y;
-                shapeList.ElementAt<Shape>(currentShapePosition).startPoints.X -= xDiff;
-                shapeList.ElementAt<Shape>(currentShapePosition).startPoints.Y -= yDiff;
-                shapeList.ElementAt<Shape>(currentShapePosition).endPoints.X -= xDiff;
-                shapeList.ElementAt<Shape>(currentShapePosition).endPoints.Y -= yDiff;
+                if (shapeList.ElementAt<Shape>(currentShapePosition) is Polygon)
+                {
+                    Polygon poly = (Polygon)shapeList.ElementAt<Shape>(currentShapePosition);
+                    poly.movePolygon(xDiff, yDiff);
+                    shapeList.Insert(currentShapePosition, poly);
+                }
+                else
+                {
+                    shapeList.ElementAt<Shape>(currentShapePosition).startPoints.X -= xDiff;
+                    shapeList.ElementAt<Shape>(currentShapePosition).startPoints.Y -= yDiff;
+                    shapeList.ElementAt<Shape>(currentShapePosition).endPoints.X -= xDiff;
+                    shapeList.ElementAt<Shape>(currentShapePosition).endPoints.Y -= yDiff;
+                }
                 start = new Point(e.X, e.Y);
                 currentShape = shapeList.ElementAt<Shape>(currentShapePosition);
                 panel2.Refresh();
@@ -133,17 +142,29 @@ namespace SimpleSketch_3353
                     xCoord = e.X;
                     yCoord = e.Y;
                 }
-                if (lineDrawn)
+                if (isDrawingPolygon)
                 {
-                    Point Start = new Point(polyEndX, polyEndY);
-                    currentShape.Draw(Start, e.Location);
+                    Polygon poly = (Polygon) currentShape;
+
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        poly.addFinishedLine(e.Location);
+                        poly.finishPolygon();
+                        repaint();
+                    }
+                    else
+                    {
+                        poly.addFinishedLine(e.Location);
+                        currentShape = poly;
+                        currentShape.Draw(start, e.Location);
+                    }
                 }
-                if (selectedShape.Equals("Polygon") && lineDrawn == false)
+                if (selectedShape.Equals("Polygon") && isDrawingPolygon == false)
                 {
                     start = new Point(e.X, e.Y);
                     currentShape = new Polygon(start, e.Location);
                     currentShape.penColor = p.Color;
-                    lineDrawn = true;
+                    isDrawingPolygon = true;
                 }
             }
             
@@ -164,16 +185,24 @@ namespace SimpleSketch_3353
 
         private void panel2_MouseUp(object sender, MouseEventArgs e)
         {
+            if (isDrawingPolygon)
+            {
+                //Only stop drawing the Polygon with Right Click
+                if (e.Button == MouseButtons.Right)
+                {
+                    isDrawingPolygon = false;
+                }
+                else
+                {
+                    isDrawing = true;
+                    return;
+                }
+            }
+
             isDrawing = false;
 
-            if(lineDrawn)
-            {
-                Polygon p = (Polygon)currentShape;
-                p.addFinishedLine(start, e.Location);
-                polyEndX = e.Location.X;
-                polyEndY = e.Location.Y;
-                currentShape = p;
-            }
+
+
             if (freeHandMode)
             {
                 freehandList.Add((Freehand)currentShape);
@@ -238,6 +267,8 @@ namespace SimpleSketch_3353
         private void polygon_Click(object sender, EventArgs e)
         {
             selectedShape = "Polygon";
+            cursorMode = false;
+            shapeMode = true;
         }
 
         private void RedColor_Click(object sender, EventArgs e)
@@ -299,18 +330,19 @@ namespace SimpleSketch_3353
 
         private void panel2_MouseClick(object sender, MouseEventArgs e)
         {
-            if (lineDrawn && e.Button==MouseButtons.Left)
+            if (isDrawingPolygon && e.Button==MouseButtons.Left)
             {
                 Polygon p = (Polygon)currentShape;
-                p.addFinishedLine(start, e.Location);
+                p.addFinishedLine(e.Location);
                 currentShape = p;
             }
-            if (lineDrawn && e.Button == MouseButtons.Right)
+            if (isDrawingPolygon && e.Button == MouseButtons.Right)
             {
                 Polygon p = (Polygon)currentShape;
-                p.addFinishedLine(start, e.Location);
+                p.addFinishedLine(e.Location);
+                p.finishPolygon();
                 currentShape = p;
-                lineDrawn = false;
+                isDrawingPolygon = false;
             }
         }
         private void panel2_MouseDoubleClick(object sender, MouseEventArgs e)
